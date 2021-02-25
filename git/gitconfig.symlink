@@ -1,0 +1,9 @@
+[user]
+	name = rfloriano
+	email = rflorianobr@gmail.com
+[alias]
+    purr = pull --rebase
+[color]
+        diff = auto
+        status = auto
+        branch = auto
