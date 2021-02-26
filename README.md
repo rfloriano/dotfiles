@@ -2,7 +2,7 @@
 
 ## install
 
-With a zero Mac OS machine, run this:
+With a reseted Mac OS machine, run this:
 
 ```sh
 curl -L https://github.com/rfloriano/dotfiles/archive/master.zip -o dotfiles.zip
