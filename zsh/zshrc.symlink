@@ -8,12 +8,14 @@ alias myip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\   -f2  | awk "
 alias flushdns='dscacheutil -flushcache'
 alias simplehttpserver='python -m http.server 8080' # python3+
 alias conflicts='code $(git diff --name-only | uniq)'
+alias python='python3'
+alias pip='pip3'
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
+  if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 fi
 
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 source /usr/local/share/antigen/antigen.zsh
 
