@@ -9,14 +9,15 @@ alias flushdns='dscacheutil -flushcache'
 alias simplehttpserver='python -m http.server 8080' # python3+
 alias conflicts='code $(git diff --name-only | uniq)'
 alias python='python3'
+# alias s3token='aws s3api get-object --bucket vtex-id --key tokens/vtexappkey-appvtex.json /tmp/aws-token.json >/dev/null && jq -r ".[].token" /tmp/aws-token.json'
+alias docker-stop='echo "Stopping containers..." && docker stop $(docker ps -a -q) && echo "Removing containers..." && docker rm $(docker ps -a -q)'
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
   if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 fi
 
-
-source /usr/local/share/antigen/antigen.zsh
+source /opt/homebrew/share/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
@@ -40,3 +41,12 @@ alias pip='pip3'
 
 export NVM_DIR="/Users/rfloriano/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Add homebrew to path
+export PATH="$PATH:/opt/homebrew/bin"
+
+# Golang setup
+export GOPATH=$HOME/workspace/go
+export GOROOT=/opt/homebrew/opt/go/libexec
+# export GO111MODULE=auto
+export PATH="$PATH:$GOPATH/bin"

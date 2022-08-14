@@ -3,7 +3,10 @@
 	email = rflorianobr@gmail.com
 [alias]
     purr = pull --rebase
+    lo = log --branches=* --graph --decorate --abbrev-commit --oneline
 [color]
         diff = auto
         status = auto
         branch = auto
+[init]
+	defaultBranch = main
