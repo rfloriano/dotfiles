@@ -10,3 +10,5 @@
         branch = auto
 [init]
 	defaultBranch = main
+[credential]
+	helper = store
