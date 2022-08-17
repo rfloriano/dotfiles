@@ -18,6 +18,7 @@ brew 'pyenv-virtualenv'
 brew 'pyenv'
 brew 'python'
 brew 'redis'
+brew 'telnet'
 brew 'wget'
 
 cask '1password'
