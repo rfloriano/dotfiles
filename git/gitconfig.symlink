@@ -1,14 +1,31 @@
-[user]
-	name = rfloriano
-	email = rflorianobr@gmail.com
 [alias]
     purr = pull --rebase
     lo = log --branches=* --graph --decorate --abbrev-commit --oneline
+	identity-set = "! read -p \"user.name: \" userName; read -p \"user.email: \" userEmail; read -p \"user.signingKey: \" userSigningKey; git config --global \"user.identities.$1.name\" \"$userName\"; git config --global \"user.identities.$1.email\" \"$userEmail\"; git config --global \"user.identities.$1.signingKey\" \"$userSigningKey\"; :"
+	identity-unset = "! git config --global --unset \"user.identities.$1.name\"; git config -global --unset \"user.identities.$1.email\"; git config -global --unset \"user.identities.$1.signingKey\"; :"
+	identity-use = "! git config user.name \"$(git config user.identities.$1.name)\"; git config user.email \"$(git config user.identities.$1.email)\"; :"
+
 [color]
         diff = auto
         status = auto
         branch = auto
+
 [init]
 	defaultBranch = main
+
 [credential]
 	helper = store
+
+[url "git@github-tucows:tucowsinc/"]
+    insteadOf = git@github.com:tucowsinc/
+
+[user]
+	useConfigOnly = true
+
+[user "identities.tucows"]
+	name = rfloriano-tc
+	email = rsilva@tucowsinc.com
+
+[user "identities.rfloriano"]
+	name = rfloriano
+	email = rflorianobr@gmail.com
