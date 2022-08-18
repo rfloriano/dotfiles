@@ -22,6 +22,8 @@
 [user]
 	useConfigOnly = true
 
+# manage profile aliases https://davorpa.github.io/git-utils/git-identity-profiles.html
+# manage multi user profiles https://gist.github.com/oanhnn/80a89405ab9023894df7
 [user "identities.tucows"]
 	name = rfloriano-tc
 	email = rsilva@tucowsinc.com
