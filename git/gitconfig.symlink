@@ -19,15 +19,21 @@
 [url "git@github-tucows:tucowsinc/"]
     insteadOf = git@github.com:tucowsinc/
 
+[url "git@github-tucows:rfloriano-tc/"]
+    insteadOf = git@github.com:rfloriano-tc/
+
 [user]
 	useConfigOnly = true
 
 # manage profile aliases https://davorpa.github.io/git-utils/git-identity-profiles.html
 # manage multi user profiles https://gist.github.com/oanhnn/80a89405ab9023894df7
 [user "identities.tucows"]
-	name = rfloriano-tc
+	name = Rafael Floriano da Silva
 	email = rsilva@tucowsinc.com
 
 [user "identities.rfloriano"]
 	name = rfloriano
 	email = rflorianobr@gmail.com
+
+[core]
+	excludesFile = ~/.gitignore_global

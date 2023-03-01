@@ -1,5 +1,31 @@
 #!/usr/bin/env bash
 
+# functions
+dockerrebuild() {
+    #do things with parameters like $1 such as
+    docker image remove $1 --force || true
+    docker buildx build --load --platform linux/amd64,linux/arm64 -t $1 .
+    docker buildx build --load -t $1 .
+}
+
+nomad-bash-exec() {
+    #do things with parameters like $1 such as
+    second_arg=${2:-"$1"}
+    nomad exec --task $1 `nomad status $second_arg | grep "run" | cut -c 1-8 | tail -n 1` bash
+}
+
+nomad-sh-exec() {
+    #do things with parameters like $1 such as
+    second_arg=${2:-"$1"}
+    nomad exec --task $1 `nomad status $second_arg | grep "run" | cut -c 1-8 | tail -n 1` sh
+}
+
+nomad-logs() {
+    #do things with parameters like $1 such as
+    second_arg=${2:-"$1"}
+    nomad alloc logs -tail -n 100 -f `nomad status $1 | grep "run" | cut -c 1-8 | tail -n 1` $second_arg
+}
+
 # Aliases
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 alias reload!='source ~/.zshrc'
@@ -11,11 +37,18 @@ alias conflicts='code $(git diff --name-only | uniq)'
 alias python='python3'
 # alias s3token='aws s3api get-object --bucket vtex-id --key tokens/vtexappkey-appvtex.json /tmp/aws-token.json >/dev/null && jq -r ".[].token" /tmp/aws-token.json'
 alias docker-stop='echo "Stopping containers..." && docker stop $(docker ps -a -q) && echo "Removing containers..." && docker rm $(docker ps -a -q)'
+alias docker-rebuild='dockerrebuild'
+alias load-nomad-dev='source ~/.nomad/dev'
+alias load-vault-dev='source ~/.vault-secrets/dev'
+
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
   if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 fi
+
+export VIRTUALENVWRAPPER_SCRIPT=/opt/homebrew/bin/virtualenvwrapper.sh
+source /opt/homebrew/bin/virtualenvwrapper_lazy.sh
 
 source /opt/homebrew/share/antigen/antigen.zsh
 
@@ -44,6 +77,9 @@ export NVM_DIR="/Users/rfloriano/.nvm"
 
 # Add homebrew to path
 export PATH="$PATH:/opt/homebrew/bin"
+
+# Add yarn global bin to path
+export PATH="$PATH:$HOME/.yarn/bin"
 
 # Golang setup
 export GOPATH=$HOME/workspace/go
